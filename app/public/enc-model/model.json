@@ -1,0 +1,160 @@
+{
+  "format": "layers-model",
+  "generatedBy": "keras v2.3.0-tf",
+  "convertedBy": "TensorFlow.js Converter v1.7.4r1",
+  "modelTopology": {
+    "keras_version": "2.3.0-tf",
+    "backend": "tensorflow",
+    "model_config": {
+      "class_name": "Model",
+      "config": {
+        "name": "model_1",
+        "layers": [
+          {
+            "class_name": "InputLayer",
+            "config": {
+              "batch_input_shape": [null, 21],
+              "dtype": "float32",
+              "sparse": false,
+              "ragged": false,
+              "name": "input_1"
+            },
+            "name": "input_1",
+            "inbound_nodes": []
+          },
+          {
+            "class_name": "Embedding",
+            "config": {
+              "name": "embedding",
+              "trainable": true,
+              "batch_input_shape": [null, null],
+              "dtype": "float32",
+              "input_dim": 10000,
+              "output_dim": 10,
+              "embeddings_initializer": {
+                "class_name": "RandomUniform",
+                "config": { "minval": -0.05, "maxval": 0.05, "seed": null }
+              },
+              "embeddings_regularizer": null,
+              "activity_regularizer": null,
+              "embeddings_constraint": null,
+              "mask_zero": false,
+              "input_length": null
+            },
+            "name": "embedding",
+            "inbound_nodes": [[["input_1", 0, 0, {}]]]
+          },
+          {
+            "class_name": "Bidirectional",
+            "config": {
+              "name": "bidirectional",
+              "trainable": true,
+              "dtype": "float32",
+              "layer": {
+                "class_name": "GRU",
+                "config": {
+                  "name": "gru",
+                  "trainable": true,
+                  "dtype": "float32",
+                  "return_sequences": true,
+                  "return_state": true,
+                  "go_backwards": false,
+                  "stateful": false,
+                  "unroll": false,
+                  "time_major": false,
+                  "units": 128,
+                  "activation": "tanh",
+                  "recurrent_activation": "sigmoid",
+                  "use_bias": true,
+                  "kernel_initializer": {
+                    "class_name": "GlorotUniform",
+                    "config": { "seed": null }
+                  },
+                  "recurrent_initializer": {
+                    "class_name": "Orthogonal",
+                    "config": { "gain": 1.0, "seed": null }
+                  },
+                  "bias_initializer": { "class_name": "Zeros", "config": {} },
+                  "kernel_regularizer": null,
+                  "recurrent_regularizer": null,
+                  "bias_regularizer": null,
+                  "activity_regularizer": null,
+                  "kernel_constraint": null,
+                  "recurrent_constraint": null,
+                  "bias_constraint": null,
+                  "dropout": 0.0,
+                  "recurrent_dropout": 0.0,
+                  "implementation": 2,
+                  "reset_after": true
+                }
+              },
+              "merge_mode": "concat"
+            },
+            "name": "bidirectional",
+            "inbound_nodes": [[["embedding", 0, 0, {}]]]
+          },
+          {
+            "class_name": "Concatenate",
+            "config": {
+              "name": "concatenate",
+              "trainable": true,
+              "dtype": "float32",
+              "axis": -1
+            },
+            "name": "concatenate",
+            "inbound_nodes": [
+              [
+                ["bidirectional", 0, 1, {}],
+                ["bidirectional", 0, 2, {}]
+              ]
+            ]
+          }
+        ],
+        "input_layers": [["input_1", 0, 0]],
+        "output_layers": [["concatenate", 0, 0]]
+      }
+    }
+  },
+  "weightsManifest": [
+    {
+      "paths": ["group1-shard1of1.bin"],
+      "weights": [
+        {
+          "name": "bidirectional/forward_gru/gru_cell_1/kernel",
+          "shape": [10, 384],
+          "dtype": "float32"
+        },
+        {
+          "name": "bidirectional/forward_gru/gru_cell_1/recurrent_kernel",
+          "shape": [128, 384],
+          "dtype": "float32"
+        },
+        {
+          "name": "bidirectional/forward_gru/gru_cell_1/bias",
+          "shape": [2, 384],
+          "dtype": "float32"
+        },
+        {
+          "name": "bidirectional/backward_gru/gru_cell_2/kernel",
+          "shape": [10, 384],
+          "dtype": "float32"
+        },
+        {
+          "name": "bidirectional/backward_gru/gru_cell_2/recurrent_kernel",
+          "shape": [128, 384],
+          "dtype": "float32"
+        },
+        {
+          "name": "bidirectional/backward_gru/gru_cell_2/bias",
+          "shape": [2, 384],
+          "dtype": "float32"
+        },
+        {
+          "name": "embedding/embeddings",
+          "shape": [10000, 10],
+          "dtype": "float32"
+        }
+      ]
+    }
+  ]
+}
