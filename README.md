@@ -1,6 +1,6 @@
 # Gmail Smart Compose
 
-Detailed article explaining the training process and usage in browser: [mail Smart Compose in Keras and Tensorflow.js](https://blog.jiayihu.net/gmail-smart-compose-in-keras-and-tensorflow-js/).
+Detailed article explaining the training process and usage in browser: [Gmail Smart Compose in Keras and Tensorflow.js](https://blog.jiayihu.net/gmail-smart-compose-in-keras-and-tensorflow-js/).
 
 This is study implementation of the Gmail Smart Compose feature, which allows to suggest sentence completion personalized on the user emails.
 
