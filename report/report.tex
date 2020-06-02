@@ -2,7 +2,7 @@
 
 
 
-
+\usepackage{arxiv}
 
 \usepackage[utf8]{inputenc} % allow utf-8 input
 \usepackage[T1]{fontenc}    % use 8-bit T1 fonts
@@ -183,17 +183,20 @@ In Table \ref{tab:hyperparameters} the results of different architectures or hyp
      \toprule
      Architecture & \# Parameters & Training time & Perplexity \\
      \midrule
+     Forward-only GRU 128 outputs with a Decoder Dense Layer of 128 units  & 1,614,032 & 32min & 2.0357 \\
+     Bidirectional LSTM 128 outputs with a Decoder Dense Layer of 128 units & 1,938,640 & 35min & 1.9327 \\
      Bidirectional GRU 128 outputs with a Decoder Dense Layer of 128 units & 1,836,240 & 34min & 1.8793 \\
-     Bidirectional LSTM 128 outputs with a Decoder Dense Layer of 128 units & 1,938,640 & 43min & 1.9327 \\
-     Forward-only GRU 128 outputs with a Decoder Dense Layer of 128 units  & 1,614,032 & 24min & 2.0357 \\
      Bidirectional GRU 128 outputs with a Decoder Dense Layer of 256 units & 3,149,136 & 61min & 1.6835 \\
+     Bidirectional GRU 64 outputs with a Decoder Dense Layer of 128 units & 941,200 & 24min & 2.3211 \\
+     Bidirectional GRU 192 outputs with a Decoder Dense Layer of 192 units & 2,895,120 & 57min & 1.7118 \\
+     Bidirectional GRU 192 outputs with a Decoder Dense Layer of 128 units & 2,230,480 & 41min & 1.8352 \\
      \bottomrule
    \end{tabular}
    \caption{Results of different model hyperparameters or memory units}
    \label{tab:hyperparameters}
 \end{table}
 
-Despite the best model is 128 GRU units with 256 units in the hidden Dense layer, the model has much more parameters and therefore incurs also in slower inference time later. Since inference latency is an important metric for the task under consideration, I preferred to keep 128 units in the hidden layer which is the secondo best-scoring model.
+Despite the best model is 128 GRU outputs with 256 units in the hidden Dense layer, the model has much more parameters and therefore incurs also in slower inference time later. Since inference latency is an important metric for the task under consideration, I preferred to keep the model with 192 GRU outputs and 128 units in the hidden layer. It is the second best-scoring model but with ~2.2mln parameters compared to ~3.2mln parameters of the best-absolute model.
 
 \subsubsection{Inference Model}\label{inference-model}
 
@@ -247,36 +250,36 @@ Below there are some results provided by the inference.
      \toprule
      Input & Output \\
      \midrule
-     here is & the latest version of the captioned schedule . <end> \\
-     have a & great weekend <end> \\
-     please review & the attached outage report <end> \\
-     please call me & if you have any questions <end> \\
-     thanks for & the info <end> \\
-     let me & know if you have any questions <end> \\
-     Let me know & if you have any questions <end> \\
-     Let me know if you & have any questions <end> \\
-     this sounds & like the final four tickets is attached <end> \\
-     is this call going to & have a meeting ? <end> \\
-     can you get & a copy of the equitrans agreement next week ? thanks <end> \\
-     is it okay & ? <end> \\
-     it should & be the final ge <end> \\
-     call if there's & have any questions <end> \\
-     gave her a & call <end> \\
-     i will let & you know <end> \\
-     i will be & out of the office until monday , january , . <end> \\
-     may i get a copy of all the & invoices <end> \\
-     how is our trade & ? <end> \\
-     this looks like a & bit <end> \\
-     i am fine with the changes & . <end> \\
-     please be sure this & is a copy of the attached <end> \\
+    here is & the latest version of the usec transaction <end> \\
+    have a & good weekend <end> \\
+    please review & and let's discuss <end> \\
+    please call me & at <end> \\
+    thanks for & the help <end> \\
+    let me & know if you have any questions . <end> \\
+    Let me know & if you have any questions . <end> \\
+    Let me know if you & have any questions <end> \\
+    this sounds & good <end> \\
+    is this call going to & get a look at this ? thanks <end> \\
+    can you get & a look at this problem ? thanks <end> \\
+    is it okay & ? <end> \\
+    it should & be the absolute latest <end> \\
+    call if there's & okay with you <end> \\
+    gave her a & call <end> \\
+    i will let & you know if you have any questions <end> \\
+    i will be & there <end> \\
+    may i get a copy of all the & invoices ? thanks <end> \\
+    how is our trade & ? <end> \\
+    this looks like a & good idea <end> \\
+    i am fine with the changes & . <end> \\
+    please be sure this & is the morale booster <end> \\
      \bottomrule
    \end{tabular}
    \caption{Input-Output predictions of the inference model}
 \end{table}
 
-The predicted outputs are actually quite good. The inference model is especially good with short common sentences like \textit{"Let me know if you have any questions"} or \textit{"I will let you know"}. Some predictions also show that the predictions are personalized based on the Enron dataset, for instance in the case of \textit{"here is the latest version of the captioned schedule"}.
+The predicted outputs are actually quite good. The inference model is especially good with short common sentences like \textit{"Let me know if you have any questions"} or \textit{"I will let you know"}. Some predictions also show that the predictions are personalized based on the Enron dataset, for instance in the case of \textit{"here is the latest version of the usec transaction"}.
 
-Unfortunately, some other cases such as \textit{"it should be the final ge"} or \textit{"i will be out of the office until monday , january , ."} seem to be a bit off because of the preprocessing. If we had a bigger dataset and more training time this completions should have been discarded as very unlikely to be correct.
+Unfortunately, some other cases such as \textit{"call if there's okay with you"} or \textit{"please be sure this is the morale booster"} seem to be a bit off. If we had a bigger dataset and more training time these completions should have been discarded as very unlikely to be correct.
 
 \section{Inference in the browser}\label{inference-in-the-browser}
 
