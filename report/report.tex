@@ -2,7 +2,7 @@
 
 
 
-\usepackage{arxiv}
+
 
 \usepackage[utf8]{inputenc} % allow utf-8 input
 \usepackage[T1]{fontenc}    % use 8-bit T1 fonts
@@ -104,7 +104,7 @@ Preprocessing was a very important step of the project and required careful hand
 
 The emails are tokenized into words and essential punctuation marks like \texttt{.\ ?\ !\ ,\ '}. Other special marks like new lines are removed and multiple white spaces are compacted as single whitespaces.
 
-Quoted messages and forwarding are removed from the dataset, along with emails longer than 100 words. The latter removal has been done for two purposes: long emails tend to be uncommon to be written again by the user and the increase the required memory and training time by a great amount. Likewise, sentences longer than 20 words are not considered. The model is aimed to learn common sentences which are usually below the threshold of 20 words.
+Quoted and forwarded messages are removed from the dataset, along with emails longer than 100 words. The latter removal has been done for two purposes: long emails tend to be uncommon to be written again by the user and the increase the required memory and training time by a great amount. Likewise, sentences longer than 20 words are not considered. The model is aimed to learn common sentences which are usually below the threshold of 20 words.
 
 This process resulted in approximately 57 000 sentences.
 
@@ -189,9 +189,11 @@ In Table \ref{tab:hyperparameters} the results of different architectures or hyp
      Bidirectional GRU 128 outputs with a Decoder Dense Layer of 256 units & 3,149,136 & 61min & 1.6835 \\
      \bottomrule
    \end{tabular}
-   \caption{Results of different model hyperparameters}
+   \caption{Results of different model hyperparameters or memory units}
    \label{tab:hyperparameters}
 \end{table}
+
+Despite the best model is 128 GRU units with 256 units in the hidden Dense layer, the model has much more parameters and therefore incurs also in slower inference time later. Since inference latency is an important metric for the task under consideration, I preferred to keep 128 units in the hidden layer which is the secondo best-scoring model.
 
 \subsubsection{Inference Model}\label{inference-model}
 
