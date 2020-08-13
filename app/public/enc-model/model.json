@@ -85,7 +85,7 @@
                   "dropout": 0.0,
                   "recurrent_dropout": 0.0,
                   "implementation": 2,
-                  "reset_after": true
+                  "reset_after": false
                 }
               },
               "merge_mode": "concat"

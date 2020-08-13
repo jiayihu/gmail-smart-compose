@@ -16,8 +16,7 @@
   "author": "Jiayi Hu <jiayi.ghu@gmail.com>",
   "license": "MIT",
   "dependencies": {
-    "@tensorflow/tfjs": "^2.0.0",
-    "@tensorflow/tfjs-converter": "^2.0.0",
+    "@tensorflow/tfjs": "^2.1.0",
     "fp-ts": "^2.6.2",
     "normalize.css": "^8.0.1"
   },

@@ -12,12 +12,13 @@
       "ES2019",
       "ES2020"
     ],
-    "strict": true,
+    "strict": false,
     "noFallthroughCasesInSwitch": true,    
     "allowSyntheticDefaultImports": true,
     "esModuleInterop": true,
     "downlevelIteration": true,
-    "sourceMap": true
+    "sourceMap": true,
+    "skipLibCheck": true
   },
   "include": [
     "src"
